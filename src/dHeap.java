@@ -73,12 +73,10 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         return nelems;
     }
 
-    @Override
     public boolean isEmpty() {
         return nelems == 0;
     }
 
-    @Override
     public boolean isFull() {
         return nelems == heap.length;
     }
@@ -119,14 +117,15 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private void bubbleUp(int index) {
-        int curr_index = nelems;
-        while (parent(curr_index) >= 0 && heap[curr_index].compareTo(heap[parent(curr_index)] > 0)) {
-            swap(curr_index, parent(curr_index));
+        while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) > 0) {
+            swap(index, parent(index));
         }
     }
 
     private void swap(int pos1, int pos2) {
-
+        T temp = heap[pos1];
+        heap[pos1] = heap[pos2];
+        heap[pos2] = temp;
     }
 
     private void trickleDown(int index) {
