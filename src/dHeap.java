@@ -83,8 +83,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     @Override
     public T remove() throws NoSuchElementException {
-        // TODO
-        return null;
+
     }
 
     @Override
@@ -103,13 +102,16 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     @SuppressWarnings("unchecked")
     @Override
     public void clear() {
-        // TODO
+        heap = (T[]) new Comparable[DEFAULT_CAPACITY];
+        nelems = 0;
     }
 
     @Override
     public T element() throws NoSuchElementException {
-        // TODO
-        return null;
+        if (nelems == 0) {
+            throw new NoSuchElementException("heap is empty");
+        }
+        return heap[STARTING_POS];
     }
 
     private int parent(int index) {
