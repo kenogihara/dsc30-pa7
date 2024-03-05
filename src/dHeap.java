@@ -83,7 +83,15 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     @Override
     public T remove() throws NoSuchElementException {
-
+        if (isEmpty()) {
+            throw new NoSuchElementException("heap is empty");
+        }
+        T root = heap[STARTING_POS];
+        heap[STARTING_POS] = heap[nelems - 1];
+        heap[nelems - 1] = null;
+        trickleDown(nelems);
+        nelems--;
+        return root;
     }
 
     @Override
@@ -108,7 +116,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     @Override
     public T element() throws NoSuchElementException {
-        if (nelems == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("heap is empty");
         }
         return heap[STARTING_POS];
@@ -131,7 +139,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private void trickleDown(int index) {
-        // TODO
+        
     }
 
     @SuppressWarnings("unchecked")
