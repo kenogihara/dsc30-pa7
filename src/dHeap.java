@@ -4,7 +4,10 @@
  */
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
+import static java.util.Collections.swap;
 
 /**
  * Title: dHeap Description: This program creates a Heap with d branching factor
@@ -88,7 +91,15 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     @Override
     public void add(T item) throws NullPointerException {
-        if ()
+        if (item == null) {
+            throw new NullPointerException("item is null");
+        }
+        if (isFull()) {
+            resize();
+        }
+        heap[nelems] = item;
+        bubbleUp(nelems);
+        nelems++;
     }
 
     @SuppressWarnings("unchecked")
@@ -104,12 +115,18 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private int parent(int index) {
-        // TODO
-        return 0;
+        return (index - 1) / d;
     }
 
     private void bubbleUp(int index) {
-        // TODO
+        int curr_index = nelems;
+        while (parent(curr_index) >= 0 && heap[curr_index].compareTo(heap[parent(curr_index)] > 0)) {
+            swap(curr_index, parent(curr_index));
+        }
+    }
+
+    private void swap(int pos1, int pos2) {
+
     }
 
     private void trickleDown(int index) {
