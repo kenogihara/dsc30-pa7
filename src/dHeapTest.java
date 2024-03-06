@@ -120,6 +120,7 @@ class dHeapTest {
 
     @org.junit.jupiter.api.Test
     void add() {
+        //My test for max heap
         assertThrows(NullPointerException.class, () -> database.add(null));
         for (String name : names) {
             patients.add(name);
@@ -136,6 +137,21 @@ class dHeapTest {
         assertFalse(patients.isFull());
 
         assertThrows(NullPointerException.class, () -> patients.add(null));
+
+        //My test for min Heap with a branching factor of 3
+        for (int i = 0; i < 7; i++) {
+            priorityQueue.add(i);
+        }
+        assertEquals(Arrays.toString(new int[]{0, 1, 2, 3, 4, 5, 6}), priorityQueue.toStr());
+        priorityQueue.add(1);
+        assertEquals(8, priorityQueue.size());
+        assertEquals(Arrays.toString(new int[]{0, 1, 1, 3, 4, 5, 6, 2}), priorityQueue.toStr());
+
+        for (int i = 0; i < 7; i++) {
+            priorityQueue.remove();
+            System.out.println(priorityQueue.toStr());
+        }
+
 
     }
 
