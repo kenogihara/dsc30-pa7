@@ -145,12 +145,13 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         }
         int maxChild = index;
         for (int i : childIndices) {
-            if (i <= (nelems - 1) && this.compare(array[i], array[maxChild]) > 0) {
+            if (i <= (nelems - 1) && heap[i].compareTo(heap[maxChild]) > 0) {
                 maxChild = i;
             }
         }
         if (maxChild != index) {
-
+            swap(maxChild, index);
+            trickleDown(maxChild);
         }
     }
 
@@ -159,5 +160,4 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         System.arraycopy(heap, STARTING_POS, heap = (T[]) new Comparable[DEFAULT_CAPACITY],
                 STARTING_POS, nelems);
     }
-
 }
