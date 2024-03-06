@@ -103,6 +103,7 @@ class dHeapTest {
 
     @org.junit.jupiter.api.Test
     void remove() {
+        //My test for max heap.
         for (int i = 0; i < 5; i++) {
             database.add(i);
         }
@@ -116,6 +117,15 @@ class dHeapTest {
         assertThrows(NoSuchElementException.class, () -> database.remove());
         database.add(1000000);
         assertEquals(1000000, database.remove());
+
+        //My test for min heap.
+        priorityQueue.add(800);
+        priorityQueue.add(799);
+        assertEquals(799, priorityQueue.element());
+        priorityQueue.remove();
+        assertEquals(800, priorityQueue.element());
+        priorityQueue.remove();
+        assertThrows(NoSuchElementException.class, () -> priorityQueue.remove());
     }
 
     @org.junit.jupiter.api.Test
