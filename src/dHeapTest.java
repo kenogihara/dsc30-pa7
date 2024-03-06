@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,6 +93,8 @@ class dHeapTest {
         patients.add("bootise");
         assertEquals(11, patients.size());
         assertFalse(patients.isFull());
+
+        assertThrows(NullPointerException.class, () -> patients.add(null));
 
     }
 
