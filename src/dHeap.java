@@ -89,7 +89,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         T root = heap[STARTING_POS];
         heap[STARTING_POS] = heap[nelems - 1];
         heap[nelems - 1] = null;
-        trickleDown(nelems);
+        trickleDown(STARTING_POS);
         nelems--;
         return root;
     }
@@ -139,7 +139,19 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private void trickleDown(int index) {
-        
+        int[] childIndices = new int[d];
+        for (int i = 1; i <= d; i++) {
+            childIndices[i] = d * index + i;
+        }
+        int maxChild = index;
+        for (int i : childIndices) {
+            if (i <= (nelems - 1) && this.compare(array[i], array[maxChild]) > 0) {
+                maxChild = i;
+            }
+        }
+        if (maxChild != index) {
+
+        }
     }
 
     @SuppressWarnings("unchecked")
