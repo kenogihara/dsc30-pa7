@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class dHeapTest {
     dHeap<Integer> database;
     dHeap<String> patients;
-    String[] names = {"aria", "ken", "ricky", "andrew", "arthur", "annie", "leo", "noah", "nacho"};
+    String[] names = {"aria", "ken", "ricky", "andrew", "arthur", "annie", "dom", "noah", "nacho"};
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -68,9 +68,21 @@ class dHeapTest {
 
     @org.junit.jupiter.api.Test
     void add() {
+        assertThrows(NullPointerException.class, () -> database.add(null));
         for (String name : names) {
             patients.add(name);
         }
+        assertEquals(Arrays.toString(new String[]{"ricky", "noah", "ken", "nacho", "aria", "annie",
+                "dom", "andrew", "arthur"}), patients.toString());
+        patients.add("zane");
+        assertEquals(Arrays.toString(new String[]{"zane", "ricky", "ken", "nacho", "noah", "annie",
+                "dom", "andrew", "arthur", "aria"}), patients.toString());
+
+        assertTrue(patients.isFull());
+        patients.add("bootise");
+        assertEquals(11, patients.size());
+        assertFalse(patients.isFull());
+
     }
 
     @org.junit.jupiter.api.Test

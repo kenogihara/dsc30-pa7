@@ -170,6 +170,6 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
                 output.append(", ");
             }
         }
-        return startBracket + "" + output.toString() + "" + endBracket;
+        return startBracket + "" + output + "" + endBracket;
     }
 }
