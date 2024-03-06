@@ -145,19 +145,36 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private void trickleDown(int index) {
-        int[] childIndices = new int[d];
-        for (int i = 0; i < d; i++) {
-            childIndices[i] = d * index + i + 1;
-        }
-        int maxChild = index;
-        for (int i : childIndices) {
-            if (i <= (nelems - 1) && heap[i] != null && heap[i].compareTo(heap[maxChild]) > 0) {
-                maxChild = i;
+        if (isMaxHeap) {
+            int[] childIndices = new int[d];
+            for (int i = 0; i < d; i++) {
+                childIndices[i] = d * index + i + 1;
             }
-        }
-        if (maxChild != index) {
-            swap(maxChild, index);
-            trickleDown(maxChild);
+            int maxChild = index;
+            for (int i : childIndices) {
+                if (i <= (nelems - 1) && heap[i] != null && heap[i].compareTo(heap[maxChild]) > 0) {
+                    maxChild = i;
+                }
+            }
+            if (maxChild != index) {
+                swap(maxChild, index);
+                trickleDown(maxChild);
+            }
+        } else {
+            int[] childIndices = new int[d];
+            for (int i = 0; i < d; i++) {
+                childIndices[i] = d * index + i + 1;
+            }
+            int minChild = index;
+            for (int i : childIndices) {
+                if (i <= (nelems - 1) && heap[i] != null && heap[i].compareTo(heap[minChild]) < 0) {
+                    minChild = i;
+                }
+            }
+            if (minChild != index) {
+                swap(minChild, index);
+                trickleDown(minChild);
+            }
         }
     }
 

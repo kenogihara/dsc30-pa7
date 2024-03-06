@@ -149,9 +149,11 @@ class dHeapTest {
 
         for (int i = 0; i < 7; i++) {
             priorityQueue.remove();
-            System.out.println(priorityQueue.toStr());
+            //System.out.println(priorityQueue.toStr());
         }
-
+        assertEquals(6, priorityQueue.element());
+        assertEquals(1, priorityQueue.size());
+        assertThrows(NullPointerException.class, () -> priorityQueue.add(null));
 
     }
 
@@ -186,12 +188,29 @@ class dHeapTest {
 
     @Test
     void toStr() {
+        //My test for max heap with capacity 10.
         for (int i = 0; i < 11; i++) {
             if (i % 2 == 0) {
                 database.add(i);
             }
         }
         assertEquals(Arrays.toString(new int[]{10, 6, 8, 0, 4, 2}), database.toStr());
-        System.out.println(database.toStr());
+        //System.out.println(database.toStr());
+
+        //My test for min Heap with capacity 7.
+        for (int i = 0; i < 11; i++) {
+            if (i % 2 == 0) {
+                priorityQueue.add(i);
+            }
+        }
+        assertEquals(Arrays.toString(new int[]{0, 2, 4, 6, 8, 10}), priorityQueue.toStr());
+        priorityQueue.clear();
+        for (int i = 11; i > -1; i--) {
+            if (i % 2 == 0) {
+                priorityQueue.add(i);
+            }
+        }
+        assertEquals(Arrays.toString(new int[]{0, 2, 8, 6, 10, 4}), priorityQueue.toStr());
+
     }
 }
