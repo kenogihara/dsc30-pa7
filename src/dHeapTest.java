@@ -7,11 +7,13 @@ class dHeapTest {
     dHeap<Integer> database;
     dHeap<String> patients;
     String[] names = {"aria", "ken", "ricky", "andrew", "arthur", "annie", "dom", "noah", "nacho"};
+    dHeap<Integer> priorityQueue;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
        database = new dHeap<>();
        patients = new dHeap<>();
+       priorityQueue = new dHeap<>(3, 7, false);
     }
 
     @Test
@@ -32,13 +34,25 @@ class dHeapTest {
         dHeap<Integer> customMaxHeap = new dHeap<>(1);
         customMaxHeap.add(4);
         assertTrue(customMaxHeap.isFull());
+        customMaxHeap.add(5);
+        assertTrue(customMaxHeap.isFull());
 
+        customMaxHeap.clear();
+        assertEquals(0, customMaxHeap.size());
 
+        assertThrows(NullPointerException.class, () -> customMaxHeap.add(null));
     }
 
     @Test
     void constructor3() {
+        dHeap<Integer> minHeap = new dHeap<>(3, 7, false);
 
+        for (int i = 0; i < 7; i++) {
+            minHeap.add(i);
+        }
+        assertTrue(minHeap.isFull());
+        assertEquals(7, minHeap.size());
+        assertEquals(Arrays.toString(new int[]{0, 1, 2, 3, 4, 5, 6}), minHeap.toStr());
     }
 
     @org.junit.jupiter.api.Test

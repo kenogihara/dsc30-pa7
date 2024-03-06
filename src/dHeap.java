@@ -70,10 +70,6 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         return nelems;
     }
 
-//    public T[] getHeap() {
-//        return heap;
-//    }
-
     public boolean isEmpty() {
         return nelems == 0;
     }
