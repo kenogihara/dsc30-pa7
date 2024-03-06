@@ -24,6 +24,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     /*Declare constants and magic numbers*/
     private static final int DEFAULT_CAPACITY = 10;
     private static final int BRANCHING_FACTOR = 2;
+    private static final int DOUBLE_SIZE = 2;
     private static final int STARTING_POS = 0;
 
     /**
@@ -125,6 +126,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     private void bubbleUp(int index) {
         while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) > 0) {
             swap(index, parent(index));
+            index = parent(index);
         }
     }
 
@@ -136,12 +138,12 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     private void trickleDown(int index) {
         int[] childIndices = new int[d];
-        for (int i = 1; i <= d; i++) {
-            childIndices[i] = d * index + i;
+        for (int i = 0; i < d; i++) {
+            childIndices[i] = d * index + i + 1;
         }
         int maxChild = index;
         for (int i : childIndices) {
-            if (i <= (nelems - 1) && heap[i].compareTo(heap[maxChild]) > 0) {
+            if (i <= (nelems - 1) && heap[i] != null && heap[i].compareTo(heap[maxChild]) > 0) {
                 maxChild = i;
             }
         }
@@ -153,7 +155,21 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
 
     @SuppressWarnings("unchecked")
     private void resize() {
-        System.arraycopy(heap, STARTING_POS, heap = (T[]) new Comparable[DEFAULT_CAPACITY],
-                STARTING_POS, nelems);
+        T[] newHeap = (T[]) new Comparable[heap.length * DOUBLE_SIZE];
+        System.arraycopy(heap, STARTING_POS, newHeap, STARTING_POS, nelems);
+        heap = newHeap;
+    }
+
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        String startBracket = "[";
+        String endBracket = "]";
+        for (int i = 0; i < nelems; i++) {
+            output.append(heap[i]);
+            if (i != nelems - 1) {
+                output.append(", ");
+            }
+        }
+        return startBracket + "" + output.toString() + "" + endBracket;
     }
 }
