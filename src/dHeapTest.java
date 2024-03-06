@@ -1,6 +1,7 @@
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class dHeapTest {
@@ -27,6 +28,17 @@ class dHeapTest {
         assertEquals(5, database.size());
         database.clear();
         assertEquals(0, database.size());
+
+        for (int i = 0; i < 12; i++) {
+            database.add(i);
+        }
+        assertEquals(12, database.size());
+
+        for (int i = 0; i < 12; i++) {
+            database.add(i);
+            database.remove();
+        }
+        assertEquals(12, database.size());
     }
 
     @org.junit.jupiter.api.Test
@@ -55,11 +67,11 @@ class dHeapTest {
             database.add(i);
         }
         assertEquals(4, database.remove());
-        assertEquals(Arrays.toString(new int[]{3, 2, 1, 0}), database.toString());
+        assertEquals(Arrays.toString(new int[]{3, 2, 1, 0}), database.toStr());
         for (int i = 6; i < 15; i++) {
             database.add(i);
         }
-        assertEquals(Arrays.toString(new int[]{14, 11, 13, 8, 10, 12, 6, 0, 3, 2, 9, 1, 7}), database.toString());
+        assertEquals(Arrays.toString(new int[]{14, 11, 13, 8, 10, 12, 6, 0, 3, 2, 9, 1, 7}), database.toStr());
         database.clear();
         assertThrows(NoSuchElementException.class, () -> database.remove());
         database.add(1000000);
@@ -73,10 +85,10 @@ class dHeapTest {
             patients.add(name);
         }
         assertEquals(Arrays.toString(new String[]{"ricky", "noah", "ken", "nacho", "aria", "annie",
-                "dom", "andrew", "arthur"}), patients.toString());
+                "dom", "andrew", "arthur"}), patients.toStr());
         patients.add("zane");
         assertEquals(Arrays.toString(new String[]{"zane", "ricky", "ken", "nacho", "noah", "annie",
-                "dom", "andrew", "arthur", "aria"}), patients.toString());
+                "dom", "andrew", "arthur", "aria"}), patients.toStr());
 
         assertTrue(patients.isFull());
         patients.add("bootise");
@@ -87,9 +99,41 @@ class dHeapTest {
 
     @org.junit.jupiter.api.Test
     void clear() {
+        patients.add("patient 1");
+        assertEquals(1, patients.size());
+        patients.clear();
+        assertEquals(0, patients.size());
+
+        for (int i = 0; i < 10000; i++) {
+            patients.add("patient " + "" + i);
+        }
+        assertEquals("patient 9999", patients.element());
+        patients.clear();
+        assertEquals(0, patients.size());
     }
 
     @org.junit.jupiter.api.Test
     void element() {
+        assertThrows(NoSuchElementException.class, () -> database.element());
+        database.add(1);
+        assertEquals(1, database.element());
+
+        database.add(2);
+        assertEquals(2, database.element());
+        database.remove();
+        assertEquals(1, database.element());
+        database.remove();
+        assertThrows(NoSuchElementException.class, () -> database.element());
+    }
+
+    @Test
+    void toStr() {
+        for (int i = 0; i < 11; i++) {
+            if (i % 2 == 0) {
+                database.add(i);
+            }
+        }
+        assertEquals(Arrays.toString(new int[]{10, 6, 8, 0, 4, 2}), database.toStr());
+        System.out.println(database.toStr());
     }
 }

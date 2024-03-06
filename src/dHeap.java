@@ -160,7 +160,7 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         heap = newHeap;
     }
 
-    public String toString() {
+    public String toStr() {
         StringBuilder output = new StringBuilder();
         String startBracket = "[";
         String endBracket = "]";
