@@ -12,6 +12,13 @@ class dHeapTest {
 
     @org.junit.jupiter.api.Test
     void size() {
+        database.add(100);
+        database.add(50);
+        database.add(20);
+        database.add(10);
+        database.add(30);
+        database.add(10);
+        System.out.println(database.size());
     }
 
     @org.junit.jupiter.api.Test
