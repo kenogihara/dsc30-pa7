@@ -14,6 +14,33 @@ class dHeapTest {
        patients = new dHeap<>();
     }
 
+    @Test
+    void constructor1() {
+        dHeap<Integer> defaultMaxHeap = new dHeap<>();
+        // I'm basically adding 10 elements to check if it's full when there's 10 elements.
+        for (int i = 0; i < 10; i++) {
+            defaultMaxHeap.add(i);
+        }
+        assertTrue(defaultMaxHeap.isFull());
+        defaultMaxHeap.clear();
+        assertTrue(defaultMaxHeap.isEmpty());
+        assertThrows(NoSuchElementException.class, () -> defaultMaxHeap.remove());
+    }
+
+    @Test
+    void constructor2() {
+        dHeap<Integer> customMaxHeap = new dHeap<>(1);
+        customMaxHeap.add(4);
+        assertTrue(customMaxHeap.isFull());
+
+
+    }
+
+    @Test
+    void constructor3() {
+
+    }
+
     @org.junit.jupiter.api.Test
     void size() {
         database.add(100);

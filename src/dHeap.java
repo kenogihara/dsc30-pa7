@@ -70,6 +70,10 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         return nelems;
     }
 
+//    public T[] getHeap() {
+//        return heap;
+//    }
+
     public boolean isEmpty() {
         return nelems == 0;
     }
@@ -124,9 +128,17 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
     }
 
     private void bubbleUp(int index) {
-        while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) > 0) {
-            swap(index, parent(index));
-            index = parent(index);
+        if (isMaxHeap) {
+            while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) > 0) {
+                swap(index, parent(index));
+                index = parent(index);
+            }
+        }
+        else {
+            while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) < 0) {
+                swap(index, parent(index));
+                index = parent(index);
+            }
         }
     }
 
