@@ -58,7 +58,12 @@ public class MNIST {
          */
         @Override
         public int compareTo(DataHolder d) {
-            // TODO
+            if (this.priority > d.priority) {
+                return 1;
+            }
+            if (this.priority < d.priority) {
+                return -1;
+            }
             return 0;
         }
     }
@@ -70,8 +75,14 @@ public class MNIST {
      * @return the Euclidean distance between img1 and img2
      */
     public static float totalDist(float[] img1, float[] img2) throws IllegalArgumentException {
-        // TODO
-        return 0f;
+        if (img1.length != img2.length) {
+            throw new IllegalArgumentException("arrays differ in length");
+        }
+        float summation = 0;
+        for (int i = 0; i < img1.length; i++) {
+            summation = (float) (summation + Math.pow((img1[i] - img2[i]), 2.0));
+        }
+        return (float) Math.sqrt(summation);
     }
 
     /**
