@@ -1,6 +1,6 @@
 /*
- * Name: TODO
- * PID:  TODO
+ * Name: Ken Ogihara
+ * PID:  A16969236
  */
 
 import java.io.*;
@@ -10,8 +10,8 @@ import java.util.zip.GZIPInputStream;
 /**
  * Implementation of KNN using MyPriorityQueue on the MNIST dataset
  *
- * @author TODO
- * @since TODO
+ * @author Ken Ogihara
+ * @since ${3/6/24}
  */
 
 public class MNIST {
