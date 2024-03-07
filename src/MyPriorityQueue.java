@@ -15,6 +15,7 @@
 public class MyPriorityQueue<T extends Comparable<? super T>> {
 
     private dHeap<T> pQueue;
+    private static final int DEFAULT_CAPACITY = 4;
 
     /**
      * Constructor that creates a new priority queue
@@ -22,7 +23,7 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
      * @param initialSize the given size
      */
     public MyPriorityQueue(int initialSize) {
-        pQueue = new dHeap<>(4, initialSize, false);
+        pQueue = new dHeap<>(DEFAULT_CAPACITY, initialSize, false);
     }
 
     /**

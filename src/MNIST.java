@@ -57,6 +57,8 @@ public class MNIST {
         }
 
         /**
+         * Method that compares the priority of two difference instances.
+         *
          * @param d the other DataHolder that is being compared
          * @return an integer that determines whether priority is lower,
          *         greater, or equal to that of d
