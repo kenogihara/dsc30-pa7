@@ -133,13 +133,6 @@ public class MNIST {
                 predictedLabel = instance.label;
             }
         }
-
-        for (int i = 1; i < 10; i++) {
-            if (count[i] > maxCount) {
-                maxCount = count[i];
-                predictedLabel = i;
-            }
-        }
         return predictedLabel;
     }
 
