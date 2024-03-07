@@ -99,6 +99,8 @@ class dHeapTest {
         assertTrue(database.isFull());
         database.remove();
         assertFalse(database.isFull());
+        database.add(1);
+        assertTrue(database.isFull());
     }
 
     @org.junit.jupiter.api.Test
