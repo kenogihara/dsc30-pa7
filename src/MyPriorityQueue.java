@@ -38,6 +38,10 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
         return true;
     }
 
+    public int size() {
+        return size();
+    }
+
     /**
      * Retrieve and remove the head of this Priority Queue (smallest element), or null if the
      * queue is empty.

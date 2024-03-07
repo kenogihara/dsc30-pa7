@@ -3,8 +3,10 @@
  * PID:  A16969236
  */
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -78,7 +80,7 @@ public class MNIST {
         if (img1.length != img2.length) {
             throw new IllegalArgumentException("arrays differ in length");
         }
-        float summation = 0;
+        float summation = 0.0f;
         for (int i = 0; i < img1.length; i++) {
             summation = (float) (summation + Math.pow((img1[i] - img2[i]), 2.0));
         }
@@ -92,8 +94,24 @@ public class MNIST {
      * @return an array of DataHolders containing the k closest neighbors to image
      */
     public static DataHolder[] getClosestMatches(float[] image, int k) {
-        // TODO
-        return null;
+        MyPriorityQueue<DataHolder> kClosest = new MyPriorityQueue<>(NUM_TRAIN);
+
+        for (int i = 0; i < NUM_TRAIN; i++) {
+            float euclidianDistance = totalDist(image, TRAIN_IMAGES[i]);
+            DataHolder instance = new DataHolder(TRAIN_LABELS[i], euclidianDistance, TRAIN_IMAGES[i]);
+            kClosest.offer(instance);
+
+            if (kClosest.size() < k) {
+                kClosest.offer(instance);
+            }
+            if (kClosest.peek().priority > euclidianDistance) {
+                kClosest.poll();
+                kClosest.offer(instance);
+            }
+        }
+        List<DataHolder> result = new ArrayList<>(kClosest);
+        DataHolder[] resultArray = result.toArray(new DataHolder[0]);
+        return resultArray;
     }
 
     /**
