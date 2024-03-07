@@ -38,6 +38,11 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
         return true;
     }
 
+    /**
+     * Returns the number of elements in the Priority Queue.
+     *
+     * @return an integer.
+     * */
     public int size() {
         return size();
     }
@@ -71,6 +76,8 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
 
     /**
      * Return true is the queue is empty, false otherwise
+     *
+     * @return a boolean that shows whether or not the Priority Queue is empty.
      */
     public boolean isEmpty() {
         return pQueue.isEmpty();
