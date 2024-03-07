@@ -65,19 +65,40 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         heap = (T[]) new Comparable[heapSize];
     }
 
+    /**
+     * Method that returns the number of nodes in the heap.
+     *
+     * @return an integer that represents the heapsize.
+     */
     @Override
     public int size() {
         return nelems;
     }
 
+    /**
+     * Method that returns if a heap is empty.
+     *
+     * @return a boolean that shows whether the heap is empty or not.
+     */
     public boolean isEmpty() {
         return nelems == 0;
     }
 
+    /**
+     * Method that returns if a heap is full.
+     *
+     * @return a boolean that shows whether the heap is full or not.
+     */
     public boolean isFull() {
         return nelems == heap.length;
     }
 
+    /**
+     * Method that returns and removes the root element in a heap.
+     *
+     * @return T the root node.
+     * @throws NoSuchElementException if the heap is empty.
+     */
     @Override
     public T remove() throws NoSuchElementException {
         if (isEmpty()) {
@@ -91,6 +112,12 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         return root;
     }
 
+    /**
+     * Method that appends a new node to the heap.
+     *
+     * @param item generic item that is added to the heap.
+     * @throws NullPointerException if the item is null.
+     */
     @Override
     public void add(T item) throws NullPointerException {
         if (item == null) {
@@ -104,6 +131,9 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         nelems++;
     }
 
+    /**
+     * Method that deletes all elements in a heap.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public void clear() {
@@ -111,6 +141,12 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         nelems = 0;
     }
 
+    /**
+     * Method that returns the root element of the heap.
+     *
+     * @return T root node
+     * @throws NoSuchElementException if the heap is empty.
+     */
     @Override
     public T element() throws NoSuchElementException {
         if (isEmpty()) {
@@ -119,10 +155,22 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         return heap[STARTING_POS];
     }
 
+    /**
+     * Helper method that returns the parent index of its child/children.
+     *
+     * @param index of the child node.
+     * @return the index of its parent's position as an integer.
+     */
     private int parent(int index) {
         return (index - 1) / d;
     }
 
+    /**
+     * Helper method that bubbles up a node to its correction position, so it does not violate
+     * any heap property rules.
+     *
+     * @param index of the child.
+     * */
     private void bubbleUp(int index) {
         if (isMaxHeap) {
             while (parent(index) >= 0 && heap[index].compareTo(heap[parent(index)]) > 0) {
@@ -138,12 +186,24 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         }
     }
 
+    /**
+     * Helper method that swaps the position of two elements.
+     *
+     * @param pos1 the index position of the first element.
+     * @param pos2 the index position of the second element.
+     */
     private void swap(int pos1, int pos2) {
         T temp = heap[pos1];
         heap[pos1] = heap[pos2];
         heap[pos2] = temp;
     }
 
+    /**
+     * Helper method that trickles down a node to its correction position, so it does not violate
+     * any heap property rules.
+     *
+     * @param index of the root node.
+     * */
     private void trickleDown(int index) {
         if (isMaxHeap) {
             int[] childIndices = new int[d];
@@ -178,6 +238,9 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         }
     }
 
+    /**
+     * Helper method that doubles the size of the heap.
+     * */
     @SuppressWarnings("unchecked")
     private void resize() {
         T[] newHeap = (T[]) new Comparable[heap.length * DOUBLE_SIZE];
@@ -185,6 +248,11 @@ public class dHeap<T extends Comparable<? super T>> implements HeapInterface<T> 
         heap = newHeap;
     }
 
+    /**
+     * Helper method that outputs string representation of a given heap.
+     *
+     * @return a string representation of a heap.
+     * */
     public String toStr() {
         StringBuilder output = new StringBuilder();
         String startBracket = "[";

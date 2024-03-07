@@ -101,7 +101,8 @@ public class MNIST {
 
         for (int i = 0; i < NUM_TRAIN; i++) {
             float euclidianDistance = totalDist(image, TRAIN_IMAGES[i]);
-            DataHolder instance = new DataHolder(TRAIN_LABELS[i], euclidianDistance, TRAIN_IMAGES[i]);
+            DataHolder instance = new DataHolder(TRAIN_LABELS[i], euclidianDistance,
+                    TRAIN_IMAGES[i]);
             kClosest.offer(instance);
 
             if (kClosest.size() < k) {
@@ -129,7 +130,8 @@ public class MNIST {
         int maxCount = count[0];
         for (DataHolder instance : closestMatches) {
             count[instance.label]++;
-            if (maxCount < count[instance.label] || count[instance.label] == maxCount && instance.label < predictedLabel) {
+            if (maxCount < count[instance.label] || count[instance.label] == maxCount &&
+                    instance.label < predictedLabel) {
                 predictedLabel = instance.label;
             }
         }
@@ -146,7 +148,8 @@ public class MNIST {
      * @param imgArr the array to store images (dimension nx784)
      * @param lblArr the array to store labels (dimension n)
      */
-    public static void loadData(String imgFile, String lblFile, float[][] imgArr, short[] lblArr) throws IOException {
+    public static void loadData(String imgFile, String lblFile, float[][] imgArr, short[]
+            lblArr) throws IOException {
 
         InputStream stream;
         File data = Paths.get("src", "data", imgFile).toFile();
