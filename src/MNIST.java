@@ -107,18 +107,12 @@ public class MNIST {
             DataHolder instance = new DataHolder(TRAIN_LABELS[i], euclidianDistance,
                     TRAIN_IMAGES[i]);
             kClosest.offer(instance);
-
-            if (kClosest.size() < k) {
-                kClosest.offer(instance);
-            }
-            if (kClosest.peek().priority > euclidianDistance) {
-                kClosest.poll();
-                kClosest.offer(instance);
-            }
         }
-        List<DataHolder> result = new ArrayList<>((Collection) kClosest);
-        DataHolder[] resultArray = result.toArray(new DataHolder[0]);
-        return resultArray;
+        DataHolder[] grouped = new DataHolder[k];
+        for (int j = 0; j < k; j++) {
+            grouped[j] = kClosest.poll();
+        }
+            return grouped;
     }
 
     /**
