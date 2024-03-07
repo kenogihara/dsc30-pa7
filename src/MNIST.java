@@ -129,14 +129,17 @@ public class MNIST {
      * @return predictedLabel
      */
     public static int predict(DataHolder[] closestMatches) {
-        int[] count = new int[10];
-        int predictedLabel = 0;
-        int maxCount = count[0];
+        int[] labelCounts = new int[10];
         for (DataHolder instance : closestMatches) {
-            count[instance.label]++;
-            if (maxCount < count[instance.label] || count[instance.label] == maxCount &&
-                    instance.label < predictedLabel) {
-                predictedLabel = instance.label;
+            labelCounts[instance.label]++;
+        }
+        int predictedLabel = 0;
+        int maxCount = labelCounts[0];
+
+        for (int i = 0; i < labelCounts.length; i++) {
+            if (labelCounts[i] > maxCount || labelCounts[i] == maxCount && i < predictedLabel) {
+                maxCount = labelCounts[i];
+                predictedLabel = i;
             }
         }
         return predictedLabel;
