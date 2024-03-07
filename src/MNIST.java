@@ -3,13 +3,8 @@
  * PID:  A16969236
  */
 
-import javax.xml.crypto.Data;
-import java.awt.font.NumericShaper;
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -21,7 +16,7 @@ import java.util.zip.GZIPInputStream;
 
 public class MNIST {
 
-    public static final int NUM_TEST = 10;   // can be up to 10k
+    public static final int NUM_TEST = 100;   // can be up to 10k
     // ^ recommended to change to 100 temporarily
     public static final int NUM_TRAIN = 60_000; // can be up to 60k
 
