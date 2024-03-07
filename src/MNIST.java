@@ -4,9 +4,11 @@
  */
 
 import javax.xml.crypto.Data;
+import java.awt.font.NumericShaper;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
@@ -110,7 +112,7 @@ public class MNIST {
                 kClosest.offer(instance);
             }
         }
-        List<DataHolder> result = new ArrayList<>(kClosest);
+        List<DataHolder> result = new ArrayList<>((Collection) kClosest);
         DataHolder[] resultArray = result.toArray(new DataHolder[0]);
         return resultArray;
     }
@@ -122,8 +124,23 @@ public class MNIST {
      * @param closestMatches the array of DataHolders containing the k closest matches
      */
     public static int predict(DataHolder[] closestMatches) {
-        // TODO
-        return 0;
+        int[] count = new int[10];
+        int predictedLabel = 0;
+        int maxCount = count[0];
+        for (DataHolder instance : closestMatches) {
+            count[instance.label]++;
+            if (maxCount < count[instance.label] || count[instance.label] == maxCount && instance.label < predictedLabel) {
+                predictedLabel = instance.label;
+            }
+        }
+
+        for (int i = 1; i < 10; i++) {
+            if (count[i] > maxCount) {
+                maxCount = count[i];
+                predictedLabel = i;
+            }
+        }
+        return predictedLabel;
     }
 
     // you can ignore the rest of this file :)
