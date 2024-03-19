@@ -55,6 +55,9 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
      * @return The head of the queue (smallest element), or null if queue is empty.
      */
     public T poll() {
+        if (pQueue.isEmpty()) {
+            return null;
+        }
         return pQueue.remove();
     }
 
@@ -72,6 +75,9 @@ public class MyPriorityQueue<T extends Comparable<? super T>> {
      * @return the head of the queue, null if the queue is empty
      */
     public T peek() {
+        if (pQueue.isEmpty()) {
+            return null;
+        }
         return pQueue.element();
     }
 

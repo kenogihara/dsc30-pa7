@@ -42,6 +42,11 @@ class dHeapTest {
         assertTrue(customMaxHeap.isEmpty());
 
         assertThrows(NullPointerException.class, () -> customMaxHeap.add(null));
+
+        dHeap<Integer> customMaxHeap1 = new dHeap<>(2);
+        customMaxHeap1.add(2);
+        customMaxHeap1.add(2);
+        assertTrue(customMaxHeap1.isFull());
     }
 
     @Test
