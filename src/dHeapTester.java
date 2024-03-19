@@ -39,6 +39,7 @@ class dHeapTest {
 
         customMaxHeap.clear();
         assertEquals(0, customMaxHeap.size());
+        assertTrue(customMaxHeap.isEmpty());
 
         assertThrows(NullPointerException.class, () -> customMaxHeap.add(null));
     }
@@ -53,6 +54,8 @@ class dHeapTest {
         assertTrue(minHeap.isFull());
         assertEquals(7, minHeap.size());
         assertEquals(Arrays.toString(new int[]{0, 1, 2, 3, 4, 5, 6}), minHeap.toStr());
+        minHeap.clear();
+        assertTrue(minHeap.isEmpty());
     }
 
     @org.junit.jupiter.api.Test
